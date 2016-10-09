@@ -1,0 +1,64 @@
+﻿POST /appdata_20161006
+{
+    "settings": {
+        "number_of_shards": 5,
+        "number_of_replicas": 0,
+        "analysis": {
+            "char_filter": {
+                "separator_pattern_filter": {
+                    "type": "pattern_replace",
+                    "pattern": "(?:\\\\)+",
+                    "replacement": "/"
+                },
+                "path_normalising_filter": {
+                    "type": "pattern_replace",
+                    "pattern": "(?:.+:)?(.*)\/.*",
+                    "replacement": "$1"
+                },
+                "filename_pattern_filter": {
+                    "type": "pattern_replace",
+                    "pattern": "(.*)\/.*",
+                    "replacement": "$1"
+                }
+            },
+            "analyzer": {
+                "filepath_analyser": {
+                    "type": "custom",
+                    "char_filter": ["separator_pattern_filter",
+                    "filename_pattern_filter"],
+                    "tokenizer": "filepath_tokenizer"
+                }
+            },
+            "tokenizer": {
+                "filepath_tokenizer": {
+                    "type": "path_hierarchy",
+                    "delimiter": "/"
+                }
+            }
+        }
+    },
+    "mappings": {
+        "apple_apps": {
+            "properties": {
+                "Id": {
+                    "type": "long"
+                },
+                "AppId": {
+                    "type": "string"
+                },
+                "Hash": {
+                    "type": "string"
+                },
+                "Url": {
+                    "type": "string"
+                },
+                "Title": {
+                    "type": "string"
+                },
+                "ShortName": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
