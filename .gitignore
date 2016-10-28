@@ -1,0 +1,5 @@
+src/BulkInsertTestElasticsearch/obj
+src/BulkInsertTestElasticsearch/bin
+.vs/BulkInsertTestElasticsearch/v14/.suo
+src/BulkInsertTestElasticsearch/project.lock.json
+.vs/restore.dg
